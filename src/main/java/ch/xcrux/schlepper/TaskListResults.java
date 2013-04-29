@@ -14,4 +14,8 @@ public class TaskListResults {
     public Map<Integer, Object> getResults() {
         return results;
     }
+
+    public Object get(ResultIndex index) {
+        return this.results.get((int) index.getIndex());
+    }
 }

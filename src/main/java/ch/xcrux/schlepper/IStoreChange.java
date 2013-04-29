@@ -7,5 +7,4 @@ package ch.xcrux.schlepper;
  */
 public interface IStoreChange<TRetData extends Object> extends ITaskItem {
     IRollbackableStoreChange<TRetData> createChange();
-
 }

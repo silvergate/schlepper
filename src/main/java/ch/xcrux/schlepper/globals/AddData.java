@@ -2,9 +2,6 @@ package ch.xcrux.schlepper.globals;
 
 import ch.xcrux.schlepper.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Buran.
  *
@@ -23,7 +20,7 @@ public class AddData implements IStoreChange<DataIdAndMetadataId> {
 
     @Override
     public IRollbackableStoreChange<DataIdAndMetadataId> createChange() {
-        return new IRollbackableStoreChange<DataIdAndMetadataId>(){
+        return new IRollbackableStoreChange<DataIdAndMetadataId>() {
             @Override
             public StoreChangeInfo<DataIdAndMetadataId> perform(IStoreInts functions) {
                 final MetadataId mid = functions.createMetadataId(metadata);

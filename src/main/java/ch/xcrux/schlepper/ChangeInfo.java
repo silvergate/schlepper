@@ -14,8 +14,7 @@ public class ChangeInfo<TData extends Object, TRetValue extends Object> {
     private final TRetValue retValue;
 
     protected ChangeInfo(boolean noop, boolean useNewValue, Object newValue, boolean didModify,
-            boolean hasRetValue,
-            TRetValue retValue) {
+            boolean hasRetValue, TRetValue retValue) {
         this.noop = noop;
         this.useNewValue = useNewValue;
         this.newValue = newValue;
@@ -24,27 +23,25 @@ public class ChangeInfo<TData extends Object, TRetValue extends Object> {
         this.retValue = retValue;
     }
 
-    public static <TData extends Object, TRetValue extends Object> ChangeInfo<TData, TRetValue>
-    readOnlyAndReturn
-            (TRetValue retValue) {
-         return new ChangeInfo<TData, TRetValue>(false, false, null, false, true, retValue);
+    public static <TData extends Object, TRetValue extends Object> ChangeInfo<TData,
+            TRetValue> readOnlyAndReturn(
+            TRetValue retValue) {
+        return new ChangeInfo<TData, TRetValue>(false, false, null, false, true, retValue);
     }
 
-    public static <TData extends Object, TRetValue extends Object> ChangeInfo<TData, TRetValue>
-    modifyData
-            (TData newValue) {
+    public static <TData extends Object, TRetValue extends Object> ChangeInfo<TData,
+            TRetValue> modifyData(
+            TData newValue) {
         return new ChangeInfo<TData, TRetValue>(false, true, newValue, false, false, null);
     }
 
-    public static <TData extends Object, TRetValue extends Object> ChangeInfo<TData, TRetValue>
-    modifyDataInner
-            () {
+    public static <TData extends Object, TRetValue extends Object> ChangeInfo<TData,
+            TRetValue> modifyDataInner() {
         return new ChangeInfo<TData, TRetValue>(false, false, null, true, false, null);
     }
 
-    public static <TData extends Object, TRetValue extends Object> ChangeInfo<TData, TRetValue>
-    noop
-            () {
+    public static <TData extends Object, TRetValue extends Object> ChangeInfo<TData,
+            TRetValue> noop() {
         return new ChangeInfo<TData, TRetValue>(true, false, null, false, false, null);
     }
 

@@ -6,7 +6,8 @@ package ch.xcrux.schlepper;
  * @author: ${USER} Date: 28.04.13 Time: 23:12
  */
 public class DataTaskItem<TData extends Object, TMetadata extends IMetadata,
-        TRetData extends Object> implements ITaskItem {
+        TRetData extends Object>
+        implements ITaskItem {
     private final DataId dataId;
     private final IChange<TData, TMetadata, TRetData> task;
 

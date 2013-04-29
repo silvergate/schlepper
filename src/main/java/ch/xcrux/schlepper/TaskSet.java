@@ -13,23 +13,23 @@ public class TaskSet {
     private final List<ITaskItem> taskItemList = new ArrayList<>();
 
     public int add(ITaskItem taskItem) {
-       this.taskItemList.add(taskItem);
-        return this.taskItemList.size()-1;
+        this.taskItemList.add(taskItem);
+        return this.taskItemList.size() - 1;
     }
 
     public int getSize() {
         return this.taskItemList.size();
     }
 
-    public ITaskItem getItem(int index) {
-        return this.taskItemList.get(index);
+    public ITaskItem getItem(ResultIndex index) {
+        return this.taskItemList.get(index.getIndex());
     }
 
-    public int add(DataId dataId, IChange<?, ?, ?> change) {
-        return add(new DataTaskItem<>(dataId, change));
+    public ResultIndex add(DataId dataId, IChange<?, ?, ?> change) {
+        return new ResultIndex(add(new DataTaskItem<>(dataId, change)));
     }
 
-    public int add(int baseIndex, IChange<?, ?, ?> change) {
-        return add(new RefDataTaskItem<>(baseIndex, change));
+    public ResultIndex add(int baseIndex, IChange<?, ?, ?> change) {
+        return new ResultIndex(add(new RefDataTaskItem<>(baseIndex, change)));
     }
 }

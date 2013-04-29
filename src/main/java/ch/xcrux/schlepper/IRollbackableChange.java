@@ -9,9 +9,10 @@ import com.sun.istack.internal.Nullable;
  */
 public interface IRollbackableChange<TData extends Object, TMetadata extends IMetadata,
         TRetData extends Object> {
-    ChangeInfo<TData, TRetData> perform(DataId dataId, TMetadata metadata, @Nullable TData currentData);
+    ChangeInfo<TData, TRetData> perform(DataId dataId, TMetadata metadata,
+            @Nullable TData currentData, IStoreInts storeInts);
 
 
     //boolean isNoop();
-     //void rollback(DataId dataId);
+    //void rollback(DataId dataId);
 }

@@ -1,14 +1,14 @@
-package ch.xcrux.schlepper;
+package ch.xcrux.schlepper.interceptors;
 
 /**
  * Buran.
  *
- * @author: ${USER} Date: 26.04.13 Time: 19:18
+ * @author: ${USER} Date: 30.04.13 Time: 00:33
  */
-public class DataId implements IDataIdProvider {
+public class InterceptorId {
     private final int id;
 
-    public DataId(int id) {
+    public InterceptorId(int id) {
         this.id = id;
     }
 
@@ -21,9 +21,9 @@ public class DataId implements IDataIdProvider {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        DataId dataId = (DataId) o;
+        InterceptorId that = (InterceptorId) o;
 
-        if (id != dataId.id) return false;
+        if (id != that.id) return false;
 
         return true;
     }
@@ -34,13 +34,8 @@ public class DataId implements IDataIdProvider {
     }
 
     @Override
-    public DataId getDataId() {
-        return this;
-    }
-
-    @Override
     public String toString() {
-        return "DataId{" +
+        return "InterceptorId{" +
                 "id=" + id +
                 '}';
     }

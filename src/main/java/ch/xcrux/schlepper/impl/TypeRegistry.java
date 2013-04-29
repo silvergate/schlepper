@@ -1,8 +1,8 @@
 package ch.xcrux.schlepper.impl;
 
-import ch.xcrux.schlepper.IFacadeFactory;
+import ch.xcrux.schlepper.IFactory;
 import ch.xcrux.schlepper.TypeId;
-import ch.xcrux.schlepper.types.composite.CompositeFacadeFactory;
+import ch.xcrux.schlepper.types.composite.CompositeFactory;
 import ch.xcrux.schlepper.types.int32.Int32Factory;
 import com.sun.istack.internal.Nullable;
 
@@ -15,19 +15,19 @@ import java.util.Map;
  * @author: ${USER} Date: 27.04.13 Time: 15:50
  */
 public class TypeRegistry {
-    private final Map<TypeId, IFacadeFactory<?, ?, ?>> types = new HashMap<>();
+    private final Map<TypeId, IFactory<?, ?, ?>> types = new HashMap<>();
 
-    private void add(IFacadeFactory<?, ?, ?> factory) {
+    private void add(IFactory<?, ?, ?> factory) {
         this.types.put(factory.getTypeId(), factory);
     }
 
     public void fill() {
-       add(new CompositeFacadeFactory());
+        add(new CompositeFactory());
         add(new Int32Factory());
     }
 
     @Nullable
-    public IFacadeFactory<?, ?, ?> getFacade(TypeId typeId) {
+    public IFactory<?, ?, ?> getFacade(TypeId typeId) {
         return this.types.get(typeId);
     }
 }

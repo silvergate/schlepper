@@ -10,6 +10,7 @@ import ch.xcrux.schlepper.IChange;
 public interface IData {
     /**
      * Returns <code>true</code> if data has changed.
+     *
      * @param change
      * @return
      */

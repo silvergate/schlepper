@@ -1,12 +1,11 @@
 package ch.xcrux.schlepper.impl;
 
 import ch.xcrux.schlepper.*;
-import ch.xcrux.schlepper.globals.AddData;
-import ch.xcrux.schlepper.globals.DataIdAndMetadataId;
+import ch.xcrux.schlepper.interceptors.*;
+import com.google.common.base.Optional;
 import com.sun.istack.internal.Nullable;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -31,10 +30,14 @@ public class Store implements IStore {
 
     private int metadataIdInctementor;
 
+    private int interceptorIdIncrementor;
+
     private TypeRegistry typeRegistry;
 
+    private final Set<InterceptorImpl> interceptorSet = new HashSet<>();
+
     private TypeRegistry getTypeRegistry() {
-        if (this.typeRegistry==null) {
+        if (this.typeRegistry == null) {
             this.typeRegistry = new TypeRegistry();
             this.typeRegistry.fill();
         }
@@ -62,10 +65,16 @@ public class Store implements IStore {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
+    public InterceptorId addInterception(IThreadSwitcher threadSwitcher, IInterceptor interceptor) {
+        this.interceptorIdIncrementor++;
+        InterceptorId ici = new InterceptorId(this.interceptorIdIncrementor);
+        this.interceptorSet.add(new InterceptorImpl(ici, threadSwitcher, interceptor));
+        return ici;
+    }
 
     private DataId generateUniqueDataId() {
-      this.dataIdIncrementor++;
-        return new DataId(this.dataIdIncrementor-1);
+        this.dataIdIncrementor++;
+        return new DataId(this.dataIdIncrementor - 1);
     }
 
     private MetadataId storeMetadataGetId(IMetadata metadata) {
@@ -102,17 +111,84 @@ public class Store implements IStore {
 
         @Override
         public Object createData(IMetadata metadata) {
-            final IFacadeFactory<?, ?, ?> type = getTypeRegistry().getFacade(metadata.getTypeId());
+            final IFactory<?, ?, ?> type = getTypeRegistry().getFacade(metadata.getTypeId());
             return type.createDataInstance();
         }
-    } ;
+    };
+
+    private void invokeInterceptors(TaskListResults tlResults,
+            List<ProcessedTaskItem> processedTaskItems) {
+        final Map<IThreadSwitcher, List<Interception>> results = new HashMap<>();
+        for (final InterceptorImpl interceptor : interceptorSet) {
+            for (final ProcessedTaskItem pti : processedTaskItems) {
+
+                IThreadSwitcher ts = null;
+                InterceptionResult ir = null;
+                InterceptorId interceptorId = interceptor.getInterceptionId();
+
+                if ((pti.getDataId() != null) &&
+                        (interceptor.getInterceptor() instanceof IDataInterceptor)) {
+                    final IDataInterceptor dataInterceptor =
+                            (IDataInterceptor) interceptor.getInterceptor();
+                    if ((dataInterceptor.getDataId().equals(pti.getDataId())) &&
+                            (dataInterceptor.getChangeClass().equals(pti.getChange().getClass()))) {
+                       /* Interception matches? */
+                        Object originalRetVal = tlResults.get(pti.getResultIndex());
+                        final InterceptionResult mv =
+                                dataInterceptor.matches(pti.getChange(), originalRetVal);
+                        if (mv != null) {
+                            ir = mv;
+                            ts = interceptor.getSwitcher();
+                        }
+                    }
+                } else {
+                    if ((pti.getStoreChange() != null) &&
+                            (interceptor.getInterceptor() instanceof IGlobalInterceptor)) {
+                        IGlobalInterceptor globalInterceptor =
+                                (IGlobalInterceptor) interceptor.getInterceptor();
+
+                        if (globalInterceptor.getSupportedChangeClass()
+                                .equals(pti.getStoreChange().getClass())) {
+                            Object originalRetVal = tlResults.get(pti.getResultIndex());
+                            final InterceptionResult mv =
+                                    globalInterceptor.matches(pti.getStoreChange(), originalRetVal);
+                            if (mv != null) {
+                                ir = mv;
+                                ts = interceptor.getSwitcher();
+                            }
+                        }
+                    }
+                }
+
+                if (ir != null) {
+                    List<Interception> ic = results.get(ts);
+                    if (ic == null) {
+                        ic = new ArrayList<>();
+                        results.put(ts, ic);
+                        ic.add(new Interception(interceptorId,
+                                Optional.fromNullable(ir.getRetVal())));
+                    }
+                }
+            }
+
+            /* Invoke */
+            for (final Map.Entry<IThreadSwitcher, List<Interception>> entries : results
+                    .entrySet()) {
+                final IThreadSwitcher threadSwitcher = entries.getKey();
+                threadSwitcher.invoke(entries.getValue());
+            }
+        }
+
+    }
 
     private TaskListResults processInThread(TaskSet taskSet) {
         TaskListResults results = new TaskListResults();
-        for (int i=0; i<taskSet.getSize(); i++) {
-            final ITaskItem taskItem = taskSet.getItem(i);
+        List<ProcessedTaskItem> resultsForIncerceptors = new ArrayList<>();
+
+        for (int i = 0; i < taskSet.getSize(); i++) {
+            final ITaskItem taskItem = taskSet.getItem(new ResultIndex(i));
             if (taskItem instanceof IStoreChange) {
-                IStoreChange storeChange = (IStoreChange)taskItem;
+                IStoreChange storeChange = (IStoreChange) taskItem;
                 IRollbackableStoreChange rc = storeChange.createChange();
                 final StoreChangeInfo performResult = rc.perform(this.si);
                 if (performResult.isHasRetValue()) {
@@ -122,21 +198,25 @@ public class Store implements IStore {
                     System.out.println("No return at index " + i);
 
                 }
+                if (performResult.isDidModify()) {
+                    resultsForIncerceptors
+                            .add(ProcessedTaskItem.change(new ResultIndex(i), storeChange));
+                }
                 continue;
             }
 
             DataId dataId = null;
             IChange change = null;
             if (taskItem instanceof DataTaskItem) {
-                DataTaskItem dti = (DataTaskItem)taskItem;
+                DataTaskItem dti = (DataTaskItem) taskItem;
                 dataId = dti.getDataId();
                 change = dti.getTask();
             }
             if (taskItem instanceof RefDataTaskItem) {
-                RefDataTaskItem rdti = (RefDataTaskItem)taskItem;
-                final IDataIdProvider dataIdProvider = (IDataIdProvider)results.getResults().get
-                        (rdti.getBaseIndex());
-                if (dataIdProvider==null) {
+                RefDataTaskItem rdti = (RefDataTaskItem) taskItem;
+                final IDataIdProvider dataIdProvider =
+                        (IDataIdProvider) results.getResults().get(rdti.getBaseIndex());
+                if (dataIdProvider == null) {
                     throw new IllegalStateException("No result found at index " + i);
                 }
                 dataId = dataIdProvider.getDataId();
@@ -147,14 +227,22 @@ public class Store implements IStore {
             final MetadataId metadataId = dataToMetadata.get(dataId);
             final IMetadata metadata1 = metadata.get(metadataId);
             final Object currentData = data.get(dataId);
-            final ChangeInfo ci = rbc.perform(dataId, metadata1, currentData);
+            final ChangeInfo ci = rbc.perform(dataId, metadata1, currentData, this.si);
             if (ci.isHasRetValue()) {
                 results.getResults().put(i, ci.getRetValue());
             }
             if (ci.isUseNewValue()) {
-                data.put(dataId, ci.getNewValue()) ;
+                data.put(dataId, ci.getNewValue());
+            }
+            if (ci.isDidModify() || ci.isUseNewValue()) {
+                resultsForIncerceptors
+                        .add(ProcessedTaskItem.change(new ResultIndex(i), dataId, change));
             }
         }
+
+        /* Invoke interceptors */
+        invokeInterceptors(results, resultsForIncerceptors);
+
         return results;
     }
 

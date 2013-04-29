@@ -21,14 +21,14 @@ public class CompositeData implements IData {
     @Override
     public boolean applyChange(IChange change) {
         if (change instanceof SetValueChange) {
-            SetValueChange svc = (SetValueChange)change;
+            SetValueChange svc = (SetValueChange) change;
             final Object originalValue;
-            if (svc.getObject()!=null) {
+            if (svc.getObject() != null) {
                 originalValue = this.data.put(svc.getIndex(), svc.getObject());
                 return !svc.getObject().equals(originalValue);
             } else {
                 originalValue = this.data.remove(svc.getIndex());
-                return (originalValue!=null);
+                return (originalValue != null);
             }
         }
 

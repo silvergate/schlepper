@@ -8,9 +8,9 @@ import com.sun.istack.internal.Nullable;
  *
  * @author: ${USER} Date: 26.04.13 Time: 21:33
  */
-public class CompositeFacadeFactory implements IFacadeFactory<Composite, CompositeData, CompositeMeta> {
+public class CompositeFactory implements IFactory<Composite, CompositeData, CompositeMeta> {
 
-    public static final TypeId TYPE_ID = new TypeId((byte)2);
+    public static final TypeId TYPE_ID = new TypeId((byte) 2);
 
     @Override
     public Composite create(IStore store, DataId dataId) {
@@ -31,11 +31,5 @@ public class CompositeFacadeFactory implements IFacadeFactory<Composite, Composi
     @Override
     public CompositeData createDataInstance() {
         return new CompositeData();
-    }
-
-    @Override
-    public <TGetRequest extends Object> TGetRequest processGetRequest(
-            IGetRequest<TGetRequest> request, @Nullable Object currentData) {
-        throw new IllegalArgumentException("");
     }
 }

@@ -11,6 +11,6 @@ import ch.xcrux.schlepper.TypeId;
 public class CompositeMeta implements IMetadata {
     @Override
     public TypeId getTypeId() {
-        return CompositeFacadeFactory.TYPE_ID;
+        return CompositeFactory.TYPE_ID;
     }
 }

@@ -9,9 +9,13 @@ import com.sun.istack.internal.Nullable;
  */
 public interface IMetadataService {
     MetadataId setMetadataFor(DataId dataId, IMetadata metadata);
+
     void setMetadata(DataId dataId, MetadataId metadataId);
+
     void removeMetadata(MetadataId metadataId);
+
     @Nullable
     MetadataId getMetadataFor(DataId dataId);
+
     IMetadata getMetadata(MetadataId metadataId);
 }

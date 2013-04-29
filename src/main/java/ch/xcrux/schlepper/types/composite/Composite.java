@@ -23,7 +23,7 @@ public class Composite implements IFacade {
     }
 
     public Object getValue(FieldIndex fieldIndex) {
-      //  return this.store.requestAndGet(new GetValueRequest(fieldIndex));
+        //  return this.store.requestAndGet(new GetValueRequest(fieldIndex));
         return null;
     }
 }

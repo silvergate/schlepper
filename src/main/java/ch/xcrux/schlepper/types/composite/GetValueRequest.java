@@ -1,7 +1,6 @@
 package ch.xcrux.schlepper.types.composite;
 
 import ch.xcrux.schlepper.*;
-import ch.xcrux.schlepper.types.int32.Int32Meta;
 import com.sun.istack.internal.Nullable;
 
 /**
@@ -9,8 +8,7 @@ import com.sun.istack.internal.Nullable;
  *
  * @author: ${USER} Date: 26.04.13 Time: 21:41
  */
-public class GetValueRequest implements IChange<CompositeData, CompositeMeta,
-        Object> {
+public class GetValueRequest implements IChange<CompositeData, CompositeMeta, Object> {
     private final FieldIndex fieldIndex;
 
     public GetValueRequest(FieldIndex fieldIndex) {
@@ -27,9 +25,9 @@ public class GetValueRequest implements IChange<CompositeData, CompositeMeta,
 
             @Override
             public ChangeInfo<CompositeData, Object> perform(DataId dataId, CompositeMeta metadata,
-                    @Nullable CompositeData currentData) {
+                    @Nullable CompositeData currentData, IStoreInts storeInts) {
                 Object value = currentData.getData().get(fieldIndex);
-                return ChangeInfo.readOnlyAndReturn(                            value);
+                return ChangeInfo.readOnlyAndReturn(value);
 
             }
         };

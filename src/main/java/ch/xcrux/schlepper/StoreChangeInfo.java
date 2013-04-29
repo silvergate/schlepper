@@ -24,13 +24,12 @@ public class StoreChangeInfo<TRetVal extends Object> {
         return new StoreChangeInfo<TRetVal>(false, null, true);
     }
 
-    public static <TRetVal extends Object> StoreChangeInfo<TRetVal> modificationRet(TRetVal
-            retval) {
+    public static <TRetVal extends Object> StoreChangeInfo<TRetVal> modificationRet(
+            TRetVal retval) {
         return new StoreChangeInfo<TRetVal>(true, retval, true);
     }
 
-    public static <TRetVal extends Object> StoreChangeInfo<TRetVal> retReadOnly(TRetVal
-            retval) {
+    public static <TRetVal extends Object> StoreChangeInfo<TRetVal> retReadOnly(TRetVal retval) {
         return new StoreChangeInfo<TRetVal>(true, retval, false);
     }
 
