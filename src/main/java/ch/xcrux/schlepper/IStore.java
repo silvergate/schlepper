@@ -1,5 +1,7 @@
 package ch.xcrux.schlepper;
 
+import ch.xcrux.schlepper.changes.IChange;
+
 /**
  * Buran.
  *
@@ -10,14 +12,5 @@ public interface IStore {
 
     void addChange(IChange change);
 
-    <T extends IFacade> T getFacade(DataId dataId, Class<T> type);
-
-    /**
-     * Blocks until data is available.
-     *
-     * @param request
-     * @param <T>
-     * @return
-     */
-    <T extends Object> T requestAndGet(IGetRequest<T> request);
+    <T extends IType> T getFacade(DataId dataId, Class<T> type);
 }

@@ -1,7 +1,7 @@
 package ch.xcrux.schlepper.types.composite;
 
 import ch.xcrux.schlepper.DataId;
-import ch.xcrux.schlepper.IFacade;
+import ch.xcrux.schlepper.IType;
 import ch.xcrux.schlepper.IStore;
 
 /**
@@ -9,7 +9,7 @@ import ch.xcrux.schlepper.IStore;
  *
  * @author: ${USER} Date: 26.04.13 Time: 20:45
  */
-public class Composite implements IFacade {
+public class Composite implements IType {
     private final DataId dataId;
     private final IStore store;
 

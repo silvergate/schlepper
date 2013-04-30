@@ -1,4 +1,6 @@
-package ch.xcrux.schlepper;
+package ch.xcrux.schlepper.meta;
+
+import ch.xcrux.schlepper.TypeId;
 
 /**
  * Buran.

@@ -1,6 +1,11 @@
 package ch.xcrux.schlepper.globals;
 
 import ch.xcrux.schlepper.*;
+import ch.xcrux.schlepper.changes.ChangeInfo;
+import ch.xcrux.schlepper.changes.IChange;
+import ch.xcrux.schlepper.changes.IRollbackableChange;
+import ch.xcrux.schlepper.changes.IStoreInts;
+import ch.xcrux.schlepper.meta.IMetadata;
 import com.sun.istack.internal.Nullable;
 
 /**

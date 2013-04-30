@@ -1,6 +1,6 @@
 package ch.xcrux.schlepper.types.int32;
 
-import ch.xcrux.schlepper.IMetadata;
+import ch.xcrux.schlepper.meta.IMetadata;
 import ch.xcrux.schlepper.TypeId;
 
 /**
@@ -12,6 +12,6 @@ public class Int32Meta implements IMetadata {
 
     @Override
     public TypeId getTypeId() {
-        return Int32Factory.TYPE_ID;
+        return Int32Type.TYPE_ID;
     }
 }

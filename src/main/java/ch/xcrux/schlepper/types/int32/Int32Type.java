@@ -1,6 +1,7 @@
 package ch.xcrux.schlepper.types.int32;
 
 import ch.xcrux.schlepper.*;
+import ch.xcrux.schlepper.changes.IChange;
 import com.sun.istack.internal.Nullable;
 
 /**
@@ -8,7 +9,7 @@ import com.sun.istack.internal.Nullable;
  *
  * @author: ${USER} Date: 27.04.13 Time: 15:56
  */
-public class Int32Factory implements IFactory<Int32, Integer, Int32Meta> {
+public class Int32Type implements IFactory<Int32, Integer, Int32Meta> {
 
     public static final TypeId TYPE_ID = new TypeId((byte) 3);
 

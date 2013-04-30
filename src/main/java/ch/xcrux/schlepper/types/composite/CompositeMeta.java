@@ -1,6 +1,6 @@
 package ch.xcrux.schlepper.types.composite;
 
-import ch.xcrux.schlepper.IMetadata;
+import ch.xcrux.schlepper.meta.IMetadata;
 import ch.xcrux.schlepper.TypeId;
 
 /**
@@ -11,6 +11,6 @@ import ch.xcrux.schlepper.TypeId;
 public class CompositeMeta implements IMetadata {
     @Override
     public TypeId getTypeId() {
-        return CompositeFactory.TYPE_ID;
+        return CompositeType.TYPE_ID;
     }
 }

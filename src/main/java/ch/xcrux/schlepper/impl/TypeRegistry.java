@@ -2,8 +2,8 @@ package ch.xcrux.schlepper.impl;
 
 import ch.xcrux.schlepper.IFactory;
 import ch.xcrux.schlepper.TypeId;
-import ch.xcrux.schlepper.types.composite.CompositeFactory;
-import ch.xcrux.schlepper.types.int32.Int32Factory;
+import ch.xcrux.schlepper.types.composite.CompositeType;
+import ch.xcrux.schlepper.types.int32.Int32Type;
 import com.sun.istack.internal.Nullable;
 
 import java.util.HashMap;
@@ -22,8 +22,8 @@ public class TypeRegistry {
     }
 
     public void fill() {
-        add(new CompositeFactory());
-        add(new Int32Factory());
+        add(new CompositeType());
+        add(new Int32Type());
     }
 
     @Nullable

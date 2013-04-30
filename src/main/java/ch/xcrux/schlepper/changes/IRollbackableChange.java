@@ -1,5 +1,7 @@
-package ch.xcrux.schlepper;
+package ch.xcrux.schlepper.changes;
 
+import ch.xcrux.schlepper.DataId;
+import ch.xcrux.schlepper.meta.IMetadata;
 import com.sun.istack.internal.Nullable;
 
 /**

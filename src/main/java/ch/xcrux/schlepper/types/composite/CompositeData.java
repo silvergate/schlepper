@@ -1,6 +1,6 @@
 package ch.xcrux.schlepper.types.composite;
 
-import ch.xcrux.schlepper.IChange;
+import ch.xcrux.schlepper.changes.IChange;
 import ch.xcrux.schlepper.data.IData;
 
 import java.util.HashMap;

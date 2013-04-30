@@ -1,7 +1,11 @@
 package ch.xcrux.schlepper.impl;
 
 import ch.xcrux.schlepper.*;
+import ch.xcrux.schlepper.changes.*;
 import ch.xcrux.schlepper.interceptors.*;
+import ch.xcrux.schlepper.meta.IMetadata;
+import ch.xcrux.schlepper.meta.MetadataId;
+import ch.xcrux.schlepper.taskItem.*;
 import com.google.common.base.Optional;
 import com.sun.istack.internal.Nullable;
 
@@ -36,6 +40,8 @@ public class Store implements IStore {
 
     private final Set<InterceptorImpl> interceptorSet = new HashSet<>();
 
+    private final Map<Uid, DataId> guidToDataIdMap = new HashMap<>();
+
     private TypeRegistry getTypeRegistry() {
         if (this.typeRegistry == null) {
             this.typeRegistry = new TypeRegistry();
@@ -56,13 +62,12 @@ public class Store implements IStore {
     }
 
     @Override
-    public <T extends IFacade> T getFacade(DataId dataId, Class<T> type) {
+    public <T extends IType> T getFacade(DataId dataId, Class<T> type) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    @Override
-    public <T extends Object> T requestAndGet(IGetRequest<T> request) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public void shutdown() {
+        this.executorService.shutdown();
     }
 
     public InterceptorId addInterception(IThreadSwitcher threadSwitcher, IInterceptor interceptor) {
@@ -107,6 +112,11 @@ public class Store implements IStore {
         public Object removeValue(DataId dataId) {
             dataToMetadata.remove(dataId);
             return data.remove(dataId);
+        }
+
+        @Override
+        public void connectToUid(DataId dataId, Uid uid) {
+            guidToDataIdMap.put(uid, dataId);
         }
 
         @Override
@@ -221,6 +231,11 @@ public class Store implements IStore {
                 }
                 dataId = dataIdProvider.getDataId();
                 change = rdti.getTask();
+            }
+            if (taskItem instanceof UidTaskItem) {
+                final UidTaskItem uidti = (UidTaskItem)taskItem;
+                dataId = this.guidToDataIdMap.get(uidti.getUid());
+                change = uidti.getTask();
             }
 
             final IRollbackableChange rbc = change.createChange();

@@ -1,4 +1,8 @@
-package ch.xcrux.schlepper;
+package ch.xcrux.schlepper.taskItem;
+
+import ch.xcrux.schlepper.DataId;
+import ch.xcrux.schlepper.Uid;
+import ch.xcrux.schlepper.changes.IChange;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +31,10 @@ public class TaskSet {
 
     public ResultIndex add(DataId dataId, IChange<?, ?, ?> change) {
         return new ResultIndex(add(new DataTaskItem<>(dataId, change)));
+    }
+
+    public ResultIndex add(Uid uid, IChange<?, ?, ?> change) {
+        return new ResultIndex(add(new UidTaskItem<>(uid, change)));
     }
 
     public ResultIndex add(int baseIndex, IChange<?, ?, ?> change) {

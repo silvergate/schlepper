@@ -1,8 +1,8 @@
 package ch.xcrux.schlepper.impl;
 
-import ch.xcrux.schlepper.ResultIndex;
-import ch.xcrux.schlepper.TaskListResults;
-import ch.xcrux.schlepper.TaskSet;
+import ch.xcrux.schlepper.taskItem.ResultIndex;
+import ch.xcrux.schlepper.taskItem.TaskListResults;
+import ch.xcrux.schlepper.taskItem.TaskSet;
 import ch.xcrux.schlepper.globals.AddData;
 import ch.xcrux.schlepper.globals.AddDataInterceptor;
 import ch.xcrux.schlepper.globals.DataIdAndMetadataId;
@@ -52,5 +52,7 @@ public class Tests {
         Integer value = (Integer) results.get(amr);
         System.out.println("IntegerValue: " + value);
         System.out.println("Got: " + rv.getMetadataId().getId());
+
+        s.shutdown();
     }
 }

@@ -1,4 +1,4 @@
-package ch.xcrux.schlepper;
+package ch.xcrux.schlepper.taskItem;
 
 import java.util.HashMap;
 import java.util.Map;

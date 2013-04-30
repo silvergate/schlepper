@@ -1,5 +1,9 @@
-package ch.xcrux.schlepper;
+package ch.xcrux.schlepper.changes;
 
+import ch.xcrux.schlepper.DataId;
+import ch.xcrux.schlepper.Uid;
+import ch.xcrux.schlepper.meta.IMetadata;
+import ch.xcrux.schlepper.meta.MetadataId;
 import com.sun.istack.internal.Nullable;
 
 /**
@@ -17,6 +21,8 @@ public interface IStoreInts {
 
     @Nullable
     Object removeValue(DataId dataId);
+
+    void connectToUid(DataId dataId, Uid uid);
 
     @Nullable
     Object createData(IMetadata metadata);

@@ -1,9 +1,9 @@
 package ch.xcrux.schlepper.impl;
 
 import ch.xcrux.schlepper.DataId;
-import ch.xcrux.schlepper.IChange;
-import ch.xcrux.schlepper.IStoreChange;
-import ch.xcrux.schlepper.ResultIndex;
+import ch.xcrux.schlepper.changes.IChange;
+import ch.xcrux.schlepper.changes.IStoreChange;
+import ch.xcrux.schlepper.taskItem.ResultIndex;
 import com.sun.istack.internal.Nullable;
 
 /**

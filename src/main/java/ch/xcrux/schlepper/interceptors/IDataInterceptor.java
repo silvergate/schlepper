@@ -1,7 +1,7 @@
 package ch.xcrux.schlepper.interceptors;
 
 import ch.xcrux.schlepper.DataId;
-import ch.xcrux.schlepper.IChange;
+import ch.xcrux.schlepper.changes.IChange;
 import com.sun.istack.internal.Nullable;
 
 /**

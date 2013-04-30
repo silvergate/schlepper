@@ -2,7 +2,7 @@ package ch.xcrux.schlepper.globals;
 
 import ch.xcrux.schlepper.DataId;
 import ch.xcrux.schlepper.IDataIdProvider;
-import ch.xcrux.schlepper.MetadataId;
+import ch.xcrux.schlepper.meta.MetadataId;
 
 /**
  * Buran.

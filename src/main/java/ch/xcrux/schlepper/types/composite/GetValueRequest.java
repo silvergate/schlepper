@@ -1,6 +1,10 @@
 package ch.xcrux.schlepper.types.composite;
 
 import ch.xcrux.schlepper.*;
+import ch.xcrux.schlepper.changes.ChangeInfo;
+import ch.xcrux.schlepper.changes.IChange;
+import ch.xcrux.schlepper.changes.IRollbackableChange;
+import ch.xcrux.schlepper.changes.IStoreInts;
 import com.sun.istack.internal.Nullable;
 
 /**

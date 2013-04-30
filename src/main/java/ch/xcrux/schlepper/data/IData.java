@@ -1,6 +1,6 @@
 package ch.xcrux.schlepper.data;
 
-import ch.xcrux.schlepper.IChange;
+import ch.xcrux.schlepper.changes.IChange;
 
 /**
  * Buran.

@@ -1,6 +1,6 @@
 package ch.xcrux.schlepper.interceptors;
 
-import ch.xcrux.schlepper.IStoreChange;
+import ch.xcrux.schlepper.changes.IStoreChange;
 import com.sun.istack.internal.Nullable;
 
 /**

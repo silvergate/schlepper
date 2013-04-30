@@ -1,4 +1,6 @@
-package ch.xcrux.schlepper;
+package ch.xcrux.schlepper.changes;
+
+import ch.xcrux.schlepper.StoreChangeInfo;
 
 /**
  * Buran.
