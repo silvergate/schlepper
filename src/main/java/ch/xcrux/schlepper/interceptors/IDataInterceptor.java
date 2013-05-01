@@ -1,6 +1,7 @@
 package ch.xcrux.schlepper.interceptors;
 
 import ch.xcrux.schlepper.DataId;
+import ch.xcrux.schlepper.DataOrUid;
 import ch.xcrux.schlepper.changes.IChange;
 import com.sun.istack.internal.Nullable;
 
@@ -18,5 +19,5 @@ public interface IDataInterceptor<TRetData extends Object, TRetDataChange extend
     @Nullable
     InterceptionResult<TRetData> matches(TChange change, @Nullable TRetDataChange changeRet);
 
-    DataId getDataId();
+    DataOrUid getDataId();
 }

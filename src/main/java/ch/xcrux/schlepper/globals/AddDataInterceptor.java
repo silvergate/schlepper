@@ -1,8 +1,10 @@
 package ch.xcrux.schlepper.globals;
 
 import ch.xcrux.schlepper.DataId;
+import ch.xcrux.schlepper.Uid;
 import ch.xcrux.schlepper.interceptors.IGlobalInterceptor;
 import ch.xcrux.schlepper.interceptors.InterceptionResult;
+import com.sun.istack.internal.Nullable;
 
 /**
  * Buran.
@@ -11,9 +13,25 @@ import ch.xcrux.schlepper.interceptors.InterceptionResult;
  */
 public class AddDataInterceptor
         implements IGlobalInterceptor<DataId, DataIdAndMetadataId, AddData> {
+
+    @Nullable
+    private final Uid uid;
+
     @Override
     public Class<AddData> getSupportedChangeClass() {
         return AddData.class;
+    }
+
+    public AddDataInterceptor(Uid uid) {
+        this.uid = uid;
+    }
+
+    public AddDataInterceptor() {
+        this(null);
+    }
+
+    public Uid getUid() {
+        return uid;
     }
 
     @Override

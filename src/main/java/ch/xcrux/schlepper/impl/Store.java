@@ -140,8 +140,18 @@ public class Store implements IStore {
                         (interceptor.getInterceptor() instanceof IDataInterceptor)) {
                     final IDataInterceptor dataInterceptor =
                             (IDataInterceptor) interceptor.getInterceptor();
-                    if ((dataInterceptor.getDataId().equals(pti.getDataId())) &&
-                            (dataInterceptor.getChangeClass().equals(pti.getChange().getClass()))) {
+
+                    final boolean classMatch = (dataInterceptor.getChangeClass().equals(pti
+                            .getChange().getClass()));
+                    final boolean didMatch = (dataInterceptor.getDataId().getDataId()!=null) &&
+                            (dataInterceptor.getDataId().getDataId().equals(pti.getDataId()));
+                    final boolean uidMatch = (dataInterceptor.getDataId().getUid()!=null) &&
+                            (pti.getDataId().equals(this.guidToDataIdMap.get(dataInterceptor
+                                    .getDataId()
+                                    .getUid())
+                    ));
+
+                    if (classMatch && (didMatch || uidMatch)) {
                        /* Interception matches? */
                         Object originalRetVal = tlResults.get(pti.getResultIndex());
                         final InterceptionResult mv =

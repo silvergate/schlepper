@@ -18,6 +18,10 @@ public class Uid {
         return uid;
     }
 
+    public static Uid c(String uid) {
+        return new Uid(UUID.fromString(uid));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
