@@ -141,15 +141,13 @@ public class Store implements IStore {
                     final IDataInterceptor dataInterceptor =
                             (IDataInterceptor) interceptor.getInterceptor();
 
-                    final boolean classMatch = (dataInterceptor.getChangeClass().equals(pti
-                            .getChange().getClass()));
-                    final boolean didMatch = (dataInterceptor.getDataId().getDataId()!=null) &&
+                    final boolean classMatch =
+                            (dataInterceptor.getChangeClass().equals(pti.getChange().getClass()));
+                    final boolean didMatch = (dataInterceptor.getDataId().getDataId() != null) &&
                             (dataInterceptor.getDataId().getDataId().equals(pti.getDataId()));
-                    final boolean uidMatch = (dataInterceptor.getDataId().getUid()!=null) &&
-                            (pti.getDataId().equals(this.guidToDataIdMap.get(dataInterceptor
-                                    .getDataId()
-                                    .getUid())
-                    ));
+                    final boolean uidMatch = (dataInterceptor.getDataId().getUid() != null) &&
+                            (pti.getDataId().equals(this.guidToDataIdMap
+                                    .get(dataInterceptor.getDataId().getUid())));
 
                     if (classMatch && (didMatch || uidMatch)) {
                        /* Interception matches? */
@@ -243,7 +241,7 @@ public class Store implements IStore {
                 change = rdti.getTask();
             }
             if (taskItem instanceof UidTaskItem) {
-                final UidTaskItem uidti = (UidTaskItem)taskItem;
+                final UidTaskItem uidti = (UidTaskItem) taskItem;
                 dataId = this.guidToDataIdMap.get(uidti.getUid());
                 change = uidti.getTask();
             }

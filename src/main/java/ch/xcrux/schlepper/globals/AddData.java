@@ -1,6 +1,8 @@
 package ch.xcrux.schlepper.globals;
 
-import ch.xcrux.schlepper.*;
+import ch.xcrux.schlepper.DataId;
+import ch.xcrux.schlepper.StoreChangeInfo;
+import ch.xcrux.schlepper.Uid;
 import ch.xcrux.schlepper.changes.IRollbackableStoreChange;
 import ch.xcrux.schlepper.changes.IStoreChange;
 import ch.xcrux.schlepper.changes.IStoreInts;
@@ -21,7 +23,7 @@ public class AddData implements IStoreChange<DataIdAndMetadataId> {
         this(Optional.<Uid>absent(), metadata);
     }
 
-    public AddData( Optional<Uid> uid, IMetadata metadata) {
+    public AddData(Optional<Uid> uid, IMetadata metadata) {
         this.metadata = metadata;
         this.uid = uid;
     }

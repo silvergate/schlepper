@@ -9,13 +9,12 @@ import ch.xcrux.schlepper.meta.IMetadata;
  *
  * @author: ${USER} Date: 28.04.13 Time: 23:12
  */
-public class UidTaskItem<TData extends Object, TMetadata extends IMetadata,
-        TRetData extends Object>
+public class UidTaskItem<TData extends Object, TMetadata extends IMetadata, TRetData extends Object>
         implements ITaskItem {
     private final Uid uid;
     private final IChange<TData, TMetadata, TRetData> task;
 
-    public UidTaskItem( Uid uid, IChange<TData, TMetadata, TRetData> task) {
+    public UidTaskItem(Uid uid, IChange<TData, TMetadata, TRetData> task) {
         this.uid = uid;
         this.task = task;
     }

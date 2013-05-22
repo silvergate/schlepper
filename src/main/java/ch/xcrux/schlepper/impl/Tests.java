@@ -1,14 +1,14 @@
 package ch.xcrux.schlepper.impl;
 
-import ch.xcrux.schlepper.taskItem.ResultIndex;
-import ch.xcrux.schlepper.taskItem.TaskListResults;
-import ch.xcrux.schlepper.taskItem.TaskSet;
 import ch.xcrux.schlepper.globals.AddData;
 import ch.xcrux.schlepper.globals.AddDataInterceptor;
 import ch.xcrux.schlepper.globals.DataIdAndMetadataId;
 import ch.xcrux.schlepper.interceptors.IThreadSwitcher;
 import ch.xcrux.schlepper.interceptors.Interception;
 import ch.xcrux.schlepper.interceptors.InterceptorId;
+import ch.xcrux.schlepper.taskItem.ResultIndex;
+import ch.xcrux.schlepper.taskItem.TaskListResults;
+import ch.xcrux.schlepper.taskItem.TaskSet;
 import ch.xcrux.schlepper.types.int32.Int32Get;
 import ch.xcrux.schlepper.types.int32.Int32Meta;
 import ch.xcrux.schlepper.types.int32.Int32Set;

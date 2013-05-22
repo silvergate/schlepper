@@ -1,8 +1,8 @@
 package ch.xcrux.schlepper.types.composite;
 
 import ch.xcrux.schlepper.DataId;
-import ch.xcrux.schlepper.IType;
 import ch.xcrux.schlepper.IStore;
+import ch.xcrux.schlepper.IType;
 
 /**
  * Buran.

@@ -1,7 +1,7 @@
 package ch.xcrux.schlepper.types.composite;
 
-import ch.xcrux.schlepper.meta.IMetadata;
 import ch.xcrux.schlepper.TypeId;
+import ch.xcrux.schlepper.meta.IMetadata;
 
 /**
  * Buran.

@@ -9,4 +9,5 @@ import ch.xcrux.schlepper.TypeId;
  */
 public interface IMetadata {
     TypeId getTypeId();
+    //IConstraint getConstraint();
 }

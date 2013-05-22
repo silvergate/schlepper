@@ -1,6 +1,6 @@
 package ch.xcrux.schlepper.globals;
 
-import ch.xcrux.schlepper.*;
+import ch.xcrux.schlepper.DataId;
 import ch.xcrux.schlepper.changes.ChangeInfo;
 import ch.xcrux.schlepper.changes.IChange;
 import ch.xcrux.schlepper.changes.IRollbackableChange;

@@ -1,6 +1,9 @@
 package ch.xcrux.schlepper.types.composite;
 
-import ch.xcrux.schlepper.*;
+import ch.xcrux.schlepper.DataId;
+import ch.xcrux.schlepper.IFactory;
+import ch.xcrux.schlepper.IStore;
+import ch.xcrux.schlepper.TypeId;
 import ch.xcrux.schlepper.changes.IChange;
 import com.sun.istack.internal.Nullable;
 

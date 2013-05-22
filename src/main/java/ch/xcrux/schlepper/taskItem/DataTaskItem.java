@@ -1,8 +1,8 @@
 package ch.xcrux.schlepper.taskItem;
 
 import ch.xcrux.schlepper.DataId;
-import ch.xcrux.schlepper.meta.IMetadata;
 import ch.xcrux.schlepper.changes.IChange;
+import ch.xcrux.schlepper.meta.IMetadata;
 
 /**
  * Buran.

@@ -1,7 +1,7 @@
 package ch.xcrux.schlepper.types.int32;
 
-import ch.xcrux.schlepper.meta.IMetadata;
 import ch.xcrux.schlepper.TypeId;
+import ch.xcrux.schlepper.meta.IMetadata;
 
 /**
  * Buran.

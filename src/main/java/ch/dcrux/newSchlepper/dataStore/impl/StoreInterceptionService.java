@@ -1,0 +1,32 @@
+package ch.dcrux.newSchlepper.dataStore.impl;
+
+import ch.dcrux.newSchlepper.commandProcessor.ISourceRef;
+import ch.dcrux.newSchlepper.commandProcessor.ResultList;
+import ch.dcrux.newSchlepper.commandProcessor.WrappedCommandException;
+import ch.dcrux.newSchlepper.commandProcessor.impl.InterceptionService;
+import ch.dcrux.newSchlepper.commandProcessor.interception.IInterceptionContext;
+import ch.dcrux.newSchlepper.commandProcessor.interception.InterceptionId;
+
+/**
+ * Buran.
+ *
+ * @author: ${USER} Date: 22.05.13 Time: 21:35
+ */
+public class StoreInterceptionService extends InterceptionService {
+    @Override
+    public IInterceptionContext getContext(ISourceRef interceptorRef) {
+        return new IInterceptionContext() {
+            @Override
+            public void onResultSuccess(ISourceRef interceptor, InterceptionId interceptionId,
+                    ResultList resultList) {
+                System.out.println("Interception Success");
+            }
+
+            @Override
+            public void onResultFailure(ISourceRef interceptor, InterceptionId interceptionId,
+                    WrappedCommandException wrappedCommandException) {
+                System.out.println("Interception Failed");
+            }
+        };
+    }
+}
