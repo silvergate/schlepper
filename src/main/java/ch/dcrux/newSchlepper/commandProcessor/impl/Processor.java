@@ -28,6 +28,10 @@ public abstract class Processor<TProcessor extends Processor<TProcessor>> {
         this.interceptionService = interceptionService;
     }
 
+    public InterceptionService getInterceptionService() {
+        return this.interceptionService;
+    }
+
     private final Map<Class<?>, IReadOnlyCommandImpl<TProcessor, ?, ?>> readOnlyCommandImpls =
             new HashMap<>();
     private final Map<Class<?>, IModifyCommandImpl<TProcessor, ?, ?>> modifyCommandImpls =

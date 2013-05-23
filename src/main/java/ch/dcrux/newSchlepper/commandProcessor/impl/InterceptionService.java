@@ -36,16 +36,28 @@ public abstract class InterceptionService {
                 .put(getDataInterceptionImpl.getSupportingInterface(), getDataInterceptionImpl);
     }
 
-    InterceptionId add(ISourceRef interceptorRef, IInterception<?> interception) {
+    IInterceptionImpl getInterceptionImpl(IInterception<?> interception) {
+        if (interception instanceof IAbortInterception) {
+            return this.classIAbortInterceptionImplMap.get(interception.getClass());
+        } else {
+            return this.classIGetDataInterceptionImplMap.get(interception.getClass());
+        }
+
+    }
+
+    public InterceptionId add(ISourceRef interceptorRef, IInterception<?> interception) {
         final int interceptionIdInt = this.interceptionIdCounter.getAndIncrement();
         final InterceptionId interceptionId = new InterceptionId(interceptionIdInt);
 
+        /* Get implementation */
+        final IInterceptionImpl impl = getInterceptionImpl(interception);
+
         /* Get or create index */
-        IInterceptionCmpIndex index = this.interceptionIndexes.get(interception.getIndexType());
+        IInterceptionCmpIndex index = this.interceptionIndexes.get(impl.getIndexType());
         if (index == null) {
-            index = interception.createIndexInstance();
-            this.interceptionIndexes.put(interception.getIndexType(),
-                    (IInterceptionCmpIndex<IModifyCommand<?>>) index);
+            index = impl.createIndexInstance();
+            this.interceptionIndexes
+                    .put(impl.getIndexType(), (IInterceptionCmpIndex<IModifyCommand<?>>) index);
         }
 
         index.add(interception, interceptorRef, interceptionId);

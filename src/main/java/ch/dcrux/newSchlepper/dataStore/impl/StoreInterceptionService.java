@@ -19,7 +19,11 @@ public class StoreInterceptionService extends InterceptionService {
             @Override
             public void onResultSuccess(ISourceRef interceptor, InterceptionId interceptionId,
                     ResultList resultList) {
-                System.out.println("Interception Success");
+                System.out.println("Interception Success for ID: " + interceptionId.getId() + ", " +
+                        "Source: " + interceptor);
+                for (final Object result : resultList) {
+                    System.out.println("  - Value: " + result);
+                }
             }
 
             @Override

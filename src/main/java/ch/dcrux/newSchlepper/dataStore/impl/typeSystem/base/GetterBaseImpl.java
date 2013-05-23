@@ -18,6 +18,6 @@ public abstract class GetterBaseImpl<TRetval, TCommandClass extends IReadOnlyCom
 
     protected DataOrUid getDataOrUid(ResultList resultList, DataTarget target)
             throws CommandException {
-        return DataIdOrUidGetter.getDataOrUid(resultList, target);
+        return BaseUtil.getDataOrUid(resultList, target);
     }
 }

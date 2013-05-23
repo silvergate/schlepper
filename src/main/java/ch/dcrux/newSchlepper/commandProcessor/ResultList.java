@@ -1,6 +1,7 @@
 package ch.dcrux.newSchlepper.commandProcessor;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  *
  * @author: ${USER} Date: 21.05.13 Time: 22:21
  */
-public class ResultList {
+public class ResultList implements Iterable<Object> {
     private final List<Object> resultList = new ArrayList<>();
 
     public void add(Object result) {
@@ -37,5 +38,10 @@ public class ResultList {
 
     public int getNumberOfResults() {
         return this.resultList.size();
+    }
+
+    @Override
+    public Iterator<Object> iterator() {
+        return this.resultList.iterator();
     }
 }

@@ -14,9 +14,8 @@ import java.util.Set;
  * @author: ${USER} Date: 22.05.13 Time: 09:33
  */
 public interface IAbortInterceptionImpl<TModifyCommand extends IModifyCommand<?>,
-        TProcessor extends Processor, TAbortInterception extends IAbortInterception> {
-
-    Class<TAbortInterception> getSupportingInterface();
+        TProcessor extends Processor, TAbortInterception extends IAbortInterception<TModifyCommand>>
+        extends IInterceptionImpl<TModifyCommand, TProcessor, TAbortInterception> {
 
     Set<TargetedAbort> createAbortList(TProcessor processor, TAbortInterception interception,
             ISourceRef modifyCommandListSource, CommandList modifyCommandList,

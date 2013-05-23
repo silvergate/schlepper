@@ -2,11 +2,12 @@ package ch.dcrux.newSchlepper.dataStore.impl.typeSystem.int32;
 
 import ch.dcrux.newSchlepper.commandProcessor.*;
 import ch.dcrux.newSchlepper.dataStore.DataOrUid;
+import ch.dcrux.newSchlepper.dataStore.NullValue;
 import ch.dcrux.newSchlepper.dataStore.impl.Store;
-import ch.dcrux.newSchlepper.dataStore.impl.typeSystem.NullValue;
+import ch.dcrux.newSchlepper.dataStore.impl.typeSystem.base.BaseUtil;
 import ch.dcrux.newSchlepper.dataStore.impl.typeSystem.base.SetterBaseImpl;
-import ch.dcrux.newSchlepper.dataStore.typeSystem.IMetadata;
 import ch.dcrux.newSchlepper.dataStore.typeSystem.Types;
+import ch.dcrux.newSchlepper.dataStore.typeSystem.int32.Int32Meta;
 import ch.dcrux.newSchlepper.dataStore.typeSystem.int32.Int32Set;
 
 /**
@@ -30,13 +31,15 @@ public class Int32SetImpl extends SetterBaseImpl<Void, Int32Set> {
         final boolean hadValue = processor.getDataStore().hasData(dou);
 
         if (!hadValue) {
-            rollbackStoragePut.store(NullValue.NULL);
+            rollbackStoragePut.store(NullValue.SINGLETON);
         } else {
             rollbackStoragePut.store(originalValue);
         }
 
         /* Check metadata */
-        final IMetadata metadata = processor.getMetaStore().getMeta(dou);
+        final Int32Meta metadata =
+                BaseUtil.getMetadataOrNull(processor, currentResultList, command.getDataTarget(),
+                        Int32Meta.class);
         if (metadata == null) {
             /* Metadata is missing */
             throw new CommandException();

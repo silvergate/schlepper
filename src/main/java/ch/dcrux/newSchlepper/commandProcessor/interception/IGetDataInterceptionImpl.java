@@ -14,9 +14,9 @@ import java.util.Set;
  * @author: ${USER} Date: 22.05.13 Time: 09:33
  */
 public interface IGetDataInterceptionImpl<TModifyCommand extends IModifyCommand<?>,
-        TProcessor extends Processor, TGetDataInterception extends IGetDataInterception> {
-
-    Class<TGetDataInterception> getSupportingInterface();
+        TProcessor extends Processor, TGetDataInterception extends
+        IGetDataInterception<TModifyCommand>>
+        extends IInterceptionImpl<TModifyCommand, TProcessor, TGetDataInterception> {
 
     /* Nullable */
     CommandList createCommandList(TProcessor processor, TGetDataInterception interception,

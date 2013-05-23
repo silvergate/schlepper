@@ -4,6 +4,8 @@ import ch.dcrux.newSchlepper.commandProcessor.IContext;
 import ch.dcrux.newSchlepper.commandProcessor.ISourceRef;
 import ch.dcrux.newSchlepper.commandProcessor.impl.Processor;
 import ch.dcrux.newSchlepper.dataStore.impl.commands.AddDataImpl;
+import ch.dcrux.newSchlepper.dataStore.impl.commands.NullCommandImpl;
+import ch.dcrux.newSchlepper.dataStore.impl.interceptors.AddDataInterceptorImpl;
 import ch.dcrux.newSchlepper.dataStore.impl.typeSystem.int32.Int32GetImpl;
 import ch.dcrux.newSchlepper.dataStore.impl.typeSystem.int32.Int32SetImpl;
 
@@ -28,6 +30,9 @@ public class Store extends Processor<Store> {
         this.registerCommand(new Int32SetImpl());
         this.registerCommand(new Int32GetImpl());
         this.registerCommand(new AddDataImpl());
+        this.registerCommand(new NullCommandImpl());
+
+        getInterceptionService().register(new AddDataInterceptorImpl());
     }
 
     public MetaStore getMetaStore() {

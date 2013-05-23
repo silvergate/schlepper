@@ -18,6 +18,6 @@ public abstract class SetterBaseImpl<TRetval, TCommandClass extends IModifyComma
 
     protected DataOrUid getDataOrUid(ResultList resultList, DataTarget target)
             throws CommandException {
-        return DataIdOrUidGetter.getDataOrUid(resultList, target);
+        return BaseUtil.getDataOrUid(resultList, target);
     }
 }

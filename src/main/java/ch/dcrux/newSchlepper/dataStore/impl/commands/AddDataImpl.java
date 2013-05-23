@@ -21,11 +21,13 @@ public class AddDataImpl implements IModifyCommandImpl<Store, DataOrUid, AddData
     public DataOrUid run(ISourceRef sender, Store processor, CommandId thisId,
             CommandList commandList, AddData command, ResultList currentResultList,
             IRollbackStoragePut rollbackStoragePut) throws CommandException {
-        final IMetadata currentMetadata =
-                processor.getMetaStore().getMeta(DataOrUid.data(command.getUid()));
-        if (currentMetadata != null) {
-            // TODO: Metadata already exists.
-            throw new CommandException();
+        if (command.getUid() != null) {
+            final IMetadata currentMetadata =
+                    processor.getMetaStore().getMeta(DataOrUid.data(command.getUid()));
+            if (currentMetadata != null) {
+                // TODO: Metadata already exists.
+                throw new CommandException();
+            }
         }
 
         final DataOrUid dataOrUid;

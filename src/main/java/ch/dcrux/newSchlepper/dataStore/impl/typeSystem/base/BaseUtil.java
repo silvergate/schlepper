@@ -6,13 +6,16 @@ import ch.dcrux.newSchlepper.dataStore.DataId;
 import ch.dcrux.newSchlepper.dataStore.DataOrUid;
 import ch.dcrux.newSchlepper.dataStore.DataTarget;
 import ch.dcrux.newSchlepper.dataStore.Uid;
+import ch.dcrux.newSchlepper.dataStore.impl.Store;
+import ch.dcrux.newSchlepper.dataStore.typeSystem.IMetadata;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Buran.
  *
  * @author: ${USER} Date: 22.05.13 Time: 23:34
  */
-public class DataIdOrUidGetter {
+public class BaseUtil {
     public static DataOrUid getDataOrUid(ResultList resultList, DataTarget target)
             throws CommandException {
         if (target.isOne()) {
@@ -34,5 +37,20 @@ public class DataIdOrUidGetter {
             //TODO: Eigene Exception hinzufügen!
             throw new CommandException();
         }
+    }
+
+    @Nullable
+    public static <T extends IMetadata> T getMetadataOrNull(Store store, ResultList resultList,
+            DataTarget target, Class<T> type) throws CommandException {
+        final DataOrUid dataOrUid = getDataOrUid(resultList, target);
+        final IMetadata metadata = store.getMetaStore().getMeta(dataOrUid);
+        if (metadata == null) {
+            return null;
+        }
+        if (!metadata.getClass().isAssignableFrom(type)) {
+            //TODO: Exception: Wrong type
+            throw new CommandException();
+        }
+        return (T) metadata;
     }
 }
