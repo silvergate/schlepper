@@ -1,7 +1,7 @@
 package ch.dcrux.newSchlepper.commandProcessor.interception;
 
 import ch.dcrux.newSchlepper.commandProcessor.IModifyCommand;
-import ch.dcrux.newSchlepper.commandProcessor.impl.Processor;
+import ch.dcrux.newSchlepper.impl.commandProcessor.Processor;
 
 /**
  * Buran.

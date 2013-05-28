@@ -6,5 +6,7 @@ package ch.dcrux.newSchlepper.dataStore.typeSystem;
  * @author: ${USER} Date: 22.05.13 Time: 23:21
  */
 public enum Types {
-    int32
+    int32,
+    collection,
+    function
 }

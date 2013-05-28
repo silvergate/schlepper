@@ -5,12 +5,12 @@ import ch.dcrux.newSchlepper.dataStore.DataOrUid;
 import ch.dcrux.newSchlepper.dataStore.DataTarget;
 import ch.dcrux.newSchlepper.dataStore.Uid;
 import ch.dcrux.newSchlepper.dataStore.commands.AddData;
-import ch.dcrux.newSchlepper.dataStore.impl.SourceRef;
-import ch.dcrux.newSchlepper.dataStore.impl.Store;
 import ch.dcrux.newSchlepper.dataStore.interceptors.AddDataInterceptor;
 import ch.dcrux.newSchlepper.dataStore.typeSystem.int32.Int32Get;
 import ch.dcrux.newSchlepper.dataStore.typeSystem.int32.Int32Meta;
 import ch.dcrux.newSchlepper.dataStore.typeSystem.int32.Int32Set;
+import ch.dcrux.newSchlepper.impl.dataStore.SourceRef;
+import ch.dcrux.newSchlepper.impl.dataStore.Store;
 
 /**
  * Buran.

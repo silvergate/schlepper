@@ -1,6 +1,6 @@
 package ch.dcrux.newSchlepper.commandProcessor;
 
-import ch.dcrux.newSchlepper.commandProcessor.impl.Processor;
+import ch.dcrux.newSchlepper.impl.commandProcessor.Processor;
 
 /**
  * Buran.

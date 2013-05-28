@@ -4,7 +4,7 @@ import ch.dcrux.newSchlepper.commandProcessor.CommandId;
 import ch.dcrux.newSchlepper.commandProcessor.CommandList;
 import ch.dcrux.newSchlepper.commandProcessor.IModifyCommand;
 import ch.dcrux.newSchlepper.commandProcessor.ISourceRef;
-import ch.dcrux.newSchlepper.commandProcessor.impl.Processor;
+import ch.dcrux.newSchlepper.impl.commandProcessor.Processor;
 
 import java.util.Set;
 
@@ -18,6 +18,10 @@ public interface IAbortInterceptionImpl<TModifyCommand extends IModifyCommand<?>
         extends IInterceptionImpl<TModifyCommand, TProcessor, TAbortInterception> {
 
     Set<TargetedAbort> createAbortList(TProcessor processor, TAbortInterception interception,
+            ISourceRef modifyCommandListSource, CommandList modifyCommandList,
+            Set<CommandId> matchedCommand, ISourceRef interceptor);
+
+    void onCommit(TProcessor processor, TAbortInterception interception,
             ISourceRef modifyCommandListSource, CommandList modifyCommandList,
             Set<CommandId> matchedCommand, ISourceRef interceptor);
 }
